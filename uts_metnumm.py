@@ -32,10 +32,8 @@ st.markdown("""
 - NIM : 20234920001""")
 
 st.header("Flowchart")
-if os.path.exists("flowchart.png"):
-    st.image("flowchart.png", caption="Diagram Flowchart")
-else:
-    st.error("File flowchart.png tidak ditemukan.")
+image = r"D:/Matana/Semester 4/Metode Numerik/UTS/flowchart.png" 
+st.image(image, caption="Diagram Flowchart")  
 
 st.header("Data : dataset yang digunakan berisi data iklim yang mencakup beberapa variabel. dataset ini memiliki 12 kolom dan 589,265 baris.")
 image = r"D:/Matana/Semester 4/Metode Numerik/UTS/datanya.png"
