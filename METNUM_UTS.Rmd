@@ -1,0 +1,164 @@
+---
+title: "Untitled"
+author: "Naufal Fadhlullah"
+date: "2025-03-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+data<- read.csv("D:\\Matana\\Semester 4\\Metode Numerik\\UTS\\climate_data.csv")
+data
+```
+
+```{r}
+buat flowchart
+```
+
+```{r}
+data$date <- as.Date(data$date, format="%d-%m-%Y")
+
+# Plot suhu rata-rata per tanggal
+ggplot(data, aes(x = date, y = Tavg)) +
+  geom_line(color = "blue") +
+  labs(title = "Tren Suhu Rata-rata", x = "Tanggal", y = "Suhu Rata-rata (°C)") +
+  theme_minimal()
+```
+
+```{r}
+ggplot(data, aes(x = RR)) +
+  geom_histogram(binwidth = 10, fill = "red", color = "black") +
+  labs(title = "Distribusi Curah Hujan", x = "Curah Hujan (mm)", y = "Frekuensi") +
+  theme_minimal()
+```
+
+```{r}
+ggplot(data, aes(y = Tx)) +
+  geom_boxplot(fill = "lightgreen", color = "black") +
+  labs(title = "Distribusi Suhu Maksimum", y = "Suhu Maksimum (°C)") +
+  theme_minimal()
+
+```
+
+```{r}
+# Hitung matriks korelasi
+cor_matrix <- cor(data[, sapply(data, is.numeric)], use = "complete.obs")
+cor_df <- as.data.frame(as.table(cor_matrix))
+cor_df <- cor_df[abs(cor_df$Freq) >= 0.50 & cor_df$Var1 != cor_df$Var2, ]
+print(cor_df)
+```
+```{r}
+data <- data %>% select(-station_id)
+```
+
+```{r}
+data
+```
+
+```{r}
+colSums(is.na(data))
+
+```
+
+```{r}
+data <- data.frame(lapply(data, function(x) ifelse(is.na(x), median(x, na.rm = TRUE), x)))
+```
+
+```{r}
+str(data)
+```
+```{r}
+data <- data %>% mutate(across(where(is.character), as.factor))
+data <- data %>% mutate(across(where(is.factor), ~ as.numeric(as.factor(.))))
+```
+
+```{r}
+norm_data<- scale(data)
+norm_data
+```
+
+```{r}
+time_series <- data$Tavg
+time_series_detrended <- time_series - mean(time_series, na.rm = TRUE)
+time_series_scaled <- scale(time_series_detrended)
+metnum_fft <- fft(time_series_scaled)
+magnitude <- Mod(metnum_fft)  # Ambil magnitudo FFT
+N <- length(time_series_scaled)
+half_N <- floor(N / 2)  # Pastikan ambil bilangan bulat
+freq <- seq(0, 0.5, length.out = half_N)  
+magnitude <- magnitude[1:half_N]
+```
+
+```{r}
+fft_df <- data.frame(Frekuensi = freq, Magnitudo = magnitude)
+
+ggplot(fft_df, aes(x = Frekuensi, y = Magnitudo)) +
+  geom_line(color = "blue") +
+  labs(title = "Spektrum Frekuensi FFT",
+       x = "Frekuensi",
+       y = "Magnitudo") +
+  theme_minimal()
+```
+
+```{r}
+grViz("
+  digraph flowchart {
+    graph [layout = dot, rankdir = TB]
+    
+    node [shape=box, style=filled, fillcolor=lightgray]
+    
+    start [label='Mulai', shape=oval, fillcolor=lightgreen]
+    end [label='Selesai', shape=oval, fillcolor=lightblue]
+    
+    start -> loadData [label='Load Data']
+    loadData -> checkNA [label='Periksa Missing Values?']
+    
+    subgraph cluster_fill_na {
+      label = 'Penanganan NA';
+      fillcolor = lightblue;
+      style = filled;
+      
+      checkNA [label='Ada NA?']
+      fillNA [label='Isi NA dengan Median']
+      checkNA -> fillNA [label='Ya']
+      checkNA -> checkCorrelation [label='Tidak']
+    }
+    
+    checkCorrelation [label='Cek Korelasi']
+    filterFeature [label='Pilih Fitur yang berkorelasi tinggi (Tn, Tx, Tavg)']
+    dropTnTx [label='Hapus Tn dan Tx']
+    
+    transformData [label='Transformasi Data']
+    normalizeData [label='Normalisasi (Scale Data)']
+    encodeData [label='Encoding Jika Ada Kategorikal']
+    prepareData [label='Data Siap']
+    
+    analyzeTS [label='Analisis Time Series']
+    fftAnalysis [label='FFT Analysis']
+    visualizeSpectrum [label='Visualisasi Spektrum']
+    
+    discussion [label='Diskusi & Interpretasi']
+    conclusion [label='Kesimpulan']
+    
+    start -> loadData
+    loadData -> checkNA
+    fillNA -> checkCorrelation
+    checkNA -> checkCorrelation
+    checkCorrelation -> filterFeature
+    filterFeature -> dropTnTx
+    dropTnTx -> normalize
+    normalize -> encodeData
+    encodeData -> prepareData
+    prepareData -> analyzeTS
+    analyzeTS -> fftAnalysis
+    fftAnalysis -> visualizeSpectrum
+    visualizeSpectrum -> discussion
+    discussion -> conclusion
+    conclusion -> end
+  }
+")
+```
+
