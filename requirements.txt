@@ -2,7 +2,7 @@ streamlit
 pandas
 numpy
 matplotlib
-scipy.fft
+scipy
 PIL
 seaborn
 io
