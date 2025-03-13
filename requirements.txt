@@ -3,6 +3,5 @@ pandas
 numpy
 matplotlib
 scipy
-PIL
+Pillow
 seaborn
-io
