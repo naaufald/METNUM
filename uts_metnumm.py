@@ -53,8 +53,9 @@ dataset yang digunakan berisi data iklim yang mencakup beberapa variabel. datase
 namun, karena 589.265 baris data terlalu banyak, saya memotong hanya sampai 1096 baris data.""")
 
 st.subheader("Eksplorasi Data")
-df = pd.read_csv(r"D:/Matana/Semester 4/Metode Numerik/UTS/climate_data.csv")
+url = "https://raw.githubusercontent.com/naaufald/METNUM/main/climate_data.csv"
 st.write("Data iklim Indonesia")
+df = pd.read_csv(url)
 st.dataframe(df)
 
 st.write("Distribusi data, missing values, dan outliers")
