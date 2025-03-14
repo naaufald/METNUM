@@ -95,8 +95,7 @@ cor_df <- as.data.frame(as.table(cor_matrix))
 cor_df <- cor_df[abs(cor_df$Freq) >= 0.50 & cor_df$Var1 != cor_df$Var2, ]
 print(cor_df)"""
 st.markdown(kode_r)
-image = r"D:/Matana/Semester 4/Metode Numerik/UTS/korelasi.png"
-st.image(image)
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/korelasi.png")
 st.markdown("""
 pada data yang digunakan dan menggunakan kode R untuk melihat korelasi antar variabel dan berpacu pada Pearson, data yang kuat memiliki korelasi rentang 0.50--0.70 (korelasi kuat), didapatkan bahwa variabel yang memiliki korelasi tinggi ada pada variabel
 Tavg x Tn, dan juga Tavg x Tx, maka Tx atau Tn akan dihapus karena informasinya mirip dan akan menghapus RR karena memiliki banyak NA (125384)""")
