@@ -32,8 +32,7 @@ st.markdown("""
 - NIM : 20234920001""")
 
 st.header("Flowchart")
-image = r"D:/Matana/Semester 4/Metode Numerik/UTS/flowchart.png" 
-st.image(image, caption="Diagram Flowchart")  
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/flowchart.png", caption="Diagram Flowchart")
 
 st.header("Data : dataset yang digunakan berisi data iklim yang mencakup beberapa variabel. dataset ini memiliki 12 kolom dan 589,265 baris.")
 image = r"D:/Matana/Semester 4/Metode Numerik/UTS/datanya.png"
@@ -75,8 +74,7 @@ ggplot(data, aes(x = date, y = Tavg)) +
   labs(title = "Tren Suhu Rata-rata", x = "Tanggal", y = "Suhu Rata-rata (°C)") +
   theme_minimal()"""
 st.markdown(kode_r)
-image = r"D:/Matana/Semester 4/Metode Numerik/UTS/tren_suhu.png"
-st.image(image)
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/tren_suhu.png")
 
 kode_r = """
 ```r
@@ -85,8 +83,7 @@ ggplot(data, aes(x = RR)) +
   labs(title = "Distribusi Curah Hujan", x = "Curah Hujan (mm)", y = "Frekuensi") +
   theme_minimal()"""
 st.markdown(kode_r)
-image = r"D:/Matana/Semester 4/Metode Numerik/UTS/curah_hujan.png"
-st.image(image)
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/curah_hujan.png")
 
 st.subheader("Feature Engineering")
 st.write("Identifikasi Fitur")
@@ -107,8 +104,7 @@ kode_r = """
 ```r
 data <- data %>% select(-Tn, -Tx, -RR, -station_id)"""
 st.markdown(kode_r)
-image = r"D:/Matana/Semester 4/Metode Numerik/UTS/delete.png"
-st.image(image)
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/delete.png")
 
 st.subheader("Transformasi data")
 st.markdown("""karena data banyak yang NA, maka akan di ganti nilainya menggunakan median""")
@@ -116,8 +112,7 @@ kode_r = """
 ```r
 data <- data.frame(lapply(data, function(x) ifelse(is.na(x), median(x, na.rm = TRUE), x)))"""
 st.markdown(kode_r)
-image = r"D:/Matana/Semester 4/Metode Numerik/UTS/NA.png"
-st.image(image)
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/NA.png")
 
 st.markdown("""melakukan normalisasi""")
 kode_r = """
@@ -125,8 +120,7 @@ kode_r = """
 norm_data<- scale(data)
 norm_data"""
 st.markdown(kode_r)
-image = r"D:/Matana/Semester 4/Metode Numerik/UTS/normal.png"
-st.image(image)
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/normal.png")
 st.markdown("""
 beberapa hal yang dilakukan :
 1. memilih fitur : melakukan eliminasi ke fitur yang memiliki korelasi tinggi (dalam kasus ini Tx dan Tn) karena dianggap memiliki informasi yang mirip.
@@ -159,8 +153,7 @@ ggplot(fft_df, aes(x = Frekuensi, y = Magnitudo)) +
        y = "Magnitudo") +
   theme_minimal()"""
 st.markdown(kode_r)
-image = r"D:/Matana/Semester 4/Metode Numerik/UTS/spektrum.png"
-st.image(image)
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/spektrum.png")
 
 st.subheader("Evaluation and Discussion")
 st.markdown("""
