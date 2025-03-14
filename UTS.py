@@ -34,9 +34,9 @@ st.markdown("""
 st.header("Flowchart")
 st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/flowchart.png", caption="Diagram Flowchart")
 
-st.header("Data : dataset yang digunakan berisi data iklim yang mencakup beberapa variabel. dataset ini memiliki 12 kolom dan 589,265 baris.")
-st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/datanya.png", caption = "Sumber Data: https://www.kaggle.com/datasets/greegtitan/indonesia-climate?select=climate_data.csv")
-st.markdown("""
+st.header("Data : dataset yang digunakan berisi data iklim yang mencakup beberapa variabel.")
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/datanyaa.png", caption = "Sumber Data: https://www.kaggle.com/datasets/greegtitan/indonesia-climate?select=climate_data.csv")
+st.markdown ("""
 dataset yang digunakan berisi data iklim yang mencakup beberapa variabel. dataset ini memiliki 12 kolom dan 589,265 baris.
             berikut variabel yang ada di data:
 1. **Tn** – Temperatur Minimum
@@ -49,8 +49,9 @@ dataset yang digunakan berisi data iklim yang mencakup beberapa variabel. datase
 8. **ddd_x** – wind direction at maximum speed.
 9. **ff_avg** – average wind speed.
 10. **ddd_car** – most wind direction.
-11. **station_id** – station id which record the data.
-namun, karena 589.265 baris data terlalu banyak, saya memotong hanya sampai 1096 baris data.""")
+11. **station_id** – station id which record the data.""")
+            
+st.markdown("""namun, karena 589.265 baris data terlalu banyak, saya memotong hanya sampai 1096 baris data.""")
 
 st.subheader("Eksplorasi Data")
 url = "https://raw.githubusercontent.com/naaufald/METNUM/main/climate_data.csv"
@@ -75,7 +76,7 @@ ggplot(data, aes(x = date, y = Tavg)) +
   labs(title = "Tren Suhu Rata-rata", x = "Tanggal", y = "Suhu Rata-rata (°C)") +
   theme_minimal()"""
 st.markdown(kode_r)
-st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/tren_suhu.png")
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/trenn_suhu.png")
 
 kode_r = """
 ```r
@@ -84,7 +85,7 @@ ggplot(data, aes(x = RR)) +
   labs(title = "Distribusi Curah Hujan", x = "Curah Hujan (mm)", y = "Frekuensi") +
   theme_minimal()"""
 st.markdown(kode_r)
-st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/curah_hujan.png")
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/curahh_hujan.png")
 
 st.subheader("Feature Engineering")
 st.write("Identifikasi Fitur")
@@ -112,7 +113,7 @@ kode_r = """
 ```r
 data <- data.frame(lapply(data, function(x) ifelse(is.na(x), median(x, na.rm = TRUE), x)))"""
 st.markdown(kode_r)
-st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/NA.png")
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/nA.png")
 
 st.markdown("""melakukan normalisasi""")
 kode_r = """
@@ -153,7 +154,7 @@ ggplot(fft_df, aes(x = Frekuensi, y = Magnitudo)) +
        y = "Magnitudo") +
   theme_minimal()"""
 st.markdown(kode_r)
-st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/spektrum.png")
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/spektrumm.png")
 
 st.subheader("Evaluation and Discussion")
 st.markdown("""
