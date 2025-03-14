@@ -35,8 +35,7 @@ st.header("Flowchart")
 st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/flowchart.png", caption="Diagram Flowchart")
 
 st.header("Data : dataset yang digunakan berisi data iklim yang mencakup beberapa variabel. dataset ini memiliki 12 kolom dan 589,265 baris.")
-image = r"D:/Matana/Semester 4/Metode Numerik/UTS/datanya.png"
-st.image(image, caption = "Sumber Data: https://www.kaggle.com/datasets/greegtitan/indonesia-climate?select=climate_data.csv")
+st.image("https://raw.githubusercontent.com/naaufald/METNUM/main/datanya.png", caption = "Sumber Data: https://www.kaggle.com/datasets/greegtitan/indonesia-climate?select=climate_data.csv")
 st.markdown("""
 dataset yang digunakan berisi data iklim yang mencakup beberapa variabel. dataset ini memiliki 12 kolom dan 589,265 baris.
             berikut variabel yang ada di data:
